@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=390px, initial-scale=1.0" />
+    <title>game</title>
+    <style>
+      * {
+        margin: 0;
+        width: 390px;
+        /* background-color: rgb(0, 0, 0); */
+        color: black;
+        text-align: center;
+      }
+      body {
+        height: 844px;
+        background-image: url(imgs/背景.png);
+      }
+      hr {
+        margin-left: 0;
+        width: 100%;
+        background-color: #6bdaa3;
+        height: 5px;
+      }
+      #line {
+        /* text-align: left; */
+        margin-left: 20px;
+        margin-top: 25px;
+      }
+      /* #start img,
+      #kids img {
+        width: 300px;
+      } */
+      #default {
+        /* color: black; */
+        padding-top: 15px;
+        width: 58px;
+        height: 36px;
+        background-image: url(imgs/tokei.png);
+      }
+      /* .timer img {
+        width: 30px;
+      } */
+      .timer {
+        /* background: none; */
+        width: 300px;
+        display: flex;
+        margin: auto;
+        padding-top: 10%;
+
+        margin-bottom: 20px;
+      }
+      #backimg {
+        margin: auto;
+        background-color: white;
+        text-align: center;
+        height: 300px;
+        width: 360px;
+        /* 今だけ文字色黒 */
+        color: black;
+      }
+      #backimg img {
+        width: 360px;
+      }
+      #kaitou {
+        color: rgb(43, 43, 43);
+        margin-top: 15px;
+        height: 30px;
+        width: 270px;
+        background-color: rgb(255, 255, 255);
+      }
+      #kaitoubtn {
+        display: none;
+        /* background-color: plum; */
+        /* height: 60px;
+        width: 250px; */
+        /* border-radius: 10px; */
+      }
+      #quiz {
+        background-color: white;
+        /* color: black; */
+        width: 360px;
+      }
+      /* #STARTGR {
+        
+        margin-top: 2px;
+      } */
+      /* #STARTGR p {
+        color: black;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- 遊び方を問題の部分に表示させてはじまり、スタートボタンとともに問題1がスタートする -->
+
+    <div class="timer">
+      <!-- <img src="imgs/tokei.png" alt="time" /> -->
+      <span id="default">time</span>
+      <hr id="line" />
+    </div>
+    <!-- ↑タイマー -->
+    <div id="backimg">
+      <span id="quiz"> </span>
+      <img id="quizsrc" src="imgs/遊び方.png" alt="問題" />
+    </div>
+
+    <input id="kaitou" type="text" name="ans" placeholder="入力" />
+    <p>注意：漢字/ひらがな/半角数字です</p>
+    <!-- <br /> -->
+    <div id="STARTGR">
+      <div id="start">
+        <img src="imgs/むずかしい.png" alt="むずかしい" />
+      </div>
+      <p>小学生以下のみご利用できます↓</p>
+      <div id="kids">
+        <img src="imgs/かんたん.png" alt="かんたん" />
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div id="kaitoubtn">
+      <img src="imgs/回答.png" alt="回答" />
+    </div>
+    <p id="result"></p>
+
+    <script src="script.js"></script>
+  </body>
+</html>
