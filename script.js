@@ -65,15 +65,15 @@ function GAMESTART() {
 
 //問題と解答in
 const Qimg = [
-  "imgs/初級1.png",
-  "imgs/初級2.png",
-  "imgs/初級3.png",
-  "imgs/中級1.png",
-  "imgs/中級2.png",
-  "imgs/中級3.png",
-  "imgs/上級1.png",
-  "imgs/上級2.png",
-  "imgs/上級3.png",
+  "初級1.png",
+  "初級2.png",
+  "初級3.png",
+  "中級1.png",
+  "中級2.png",
+  "中級3.png",
+  "上級1.png",
+  "上級2.png",
+  "上級3.png",
 ]; //問題画像
 const Corr = [
   "将棋",
@@ -87,9 +87,9 @@ const Corr = [
   "4",
 ]; //対応する正解
 const kiQimg = [
-  "imgs/子供用謎解き1.png",
-  "imgs/子供用謎解き2.png",
-  "imgs/子供用謎解き3.png",
+  "子供用謎解き1.png",
+  "子供用謎解き2.png",
+  "子供用謎解き3.png",
 ];
 const kiCorr = ["1", "うえ", "きつねのこども"]; //三問ずつ
 
