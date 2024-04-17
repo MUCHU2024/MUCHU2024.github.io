@@ -116,10 +116,18 @@ kaitoubtn.addEventListener("click", () => {
 //解答取得↑
 
 //答え合わせ↓
+let resultimg = document.getElementById("resultimg");
+
 function checkans() {
   if (kaitou.value == correctans) {
     // 正解時
-    result.textContent = "正解";
+    result.style.display = "block";
+    
+    resultimg.src = "maruma-ku-illust3.png";
+    setTimeout(function () {
+      result.style.display = "none";
+    }, 1000);
+    
     if (mode) {
       //子供用true
       kQuizNum += 1;
@@ -130,7 +138,11 @@ function checkans() {
     nextquestion(QuizNum);
   } else {
     // 不正解時
-    result.textContent = "不正解";
+    result.style.display = "block";
+    resultimg.src = "batuma-ku-illust13.png";
+    setTimeout(function () {
+      result.style.display = "none";
+    }, 1000);
   }
 }
 //答え合わせ↑
