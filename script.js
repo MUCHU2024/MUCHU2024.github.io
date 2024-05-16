@@ -173,7 +173,7 @@ function nextquestion(Q) {
   if (mode) {
     if (kQuizNum == 4) {
       //子供クリア時
-      window.location.href = "clear.html";
+      window.location.href = "kidsclear.html";
     }
 
     //子供用
