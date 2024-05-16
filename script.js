@@ -172,6 +172,7 @@ const quizsrc = document.getElementById("quizsrc");
 function nextquestion(Q) {
   if (mode) {
     if (kQuizNum == 4) {
+      //子供クリア時
       window.location.href = "clear.html";
     }
 
@@ -199,7 +200,7 @@ function nextquestion(Q) {
     //問題imgと答え文字列を配列にいれてここで呼び出す?
     //QUiznumを引数Qにいれて管理。問題の難易度ごとに列用意、中でランダム出題？
     if (Q == 4) {
-      //３問正解時
+      //大人３問正解時
       window.location.href = "clear.html";
     }
   }
