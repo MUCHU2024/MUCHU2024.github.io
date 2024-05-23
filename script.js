@@ -157,7 +157,8 @@ function randomQ(qg) {
   if (qg == 1) {
     ran = Math.floor(Math.random() * 3);
   } else if (qg == 2) {
-    ran = Math.floor(Math.random() * 3) + 3;
+    /*ran = Math.floor(Math.random() * 3) + 3;*/
+    ran = 3;
   } else {
     ran = Math.floor(Math.random() * 3) + 6;
   }
