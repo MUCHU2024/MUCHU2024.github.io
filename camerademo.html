@@ -27,14 +27,18 @@
         });
       }
       */
-      function startCamera() {
+
+function setup() {
   createCapture({
     audio: false,
     video: {
-      facingMode: "user"
+      facingMode: {
+        exact: "environment"
+      }
     }
   });
 }
+      
       startCamera();
     </script>
   </body>
