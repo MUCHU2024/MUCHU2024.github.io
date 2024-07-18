@@ -5,6 +5,7 @@
   </head>
   <body>
     <script>
+      /*
       async function startCamera() {
         const cameraStream = await navigator.mediaDevices.getUserMedia({
           video: {
@@ -25,6 +26,15 @@
           videoElement.height = videoElement.videoHeight;
         });
       }
+      */
+      function startCamera() {
+  createCapture({
+    audio: false,
+    video: {
+      facingMode: "user"
+    }
+  });
+}
       startCamera();
     </script>
   </body>
