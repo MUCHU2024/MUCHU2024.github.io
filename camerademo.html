@@ -29,15 +29,21 @@
       startCamera();
       */
 
+var capture;
+
 function setup() {
-  createCapture({
+  createCanvas(640, 480);
+  var constraints = {
     audio: false,
     video: {
-      facingMode: {
-        exact: "environment"
-      }
+      facingMode: "user"
     }
-  });
+  };
+  capture = createCapture(constraints);
+}
+function draw() {
+  image(capture, 0, 0, 640, 480);
+  // filter(INVERT); // ;-)
 }
       
       
