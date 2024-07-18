@@ -29,22 +29,48 @@
       startCamera();
       */
 
-var capture;
+const facingModeList = [
+  "user",
+  "environment",
+  { exact: "user" },
+  { exact: "environment" },
+];
+
+const options = [];
+
+let capture;
 
 function setup() {
   createCanvas(640, 480);
-  var constraints = {
-    audio: false,
-    video: {
-      facingMode: "user"
-    }
-  };
-  capture = createCapture(constraints);
+
+  for (mode of facingModeList) {
+    options.push({
+      video: {
+        facingMode: mode,
+      },
+      audio: false,
+    });
+  }
+
+  for (let i = 0; i < options.length; i++) {
+    const button = createButton(JSON.stringify(facingModeList[i]));
+    button.position(10, 10 + 35 * i);
+    button.size(160);
+    button.mousePressed(function () {
+      capture = createCapture(options[i]);
+      capture.hide();
+    });
+  }
 }
+
 function draw() {
-  image(capture, 0, 0, 640, 480);
-  // filter(INVERT); // ;-)
+  background(220);
+
+  if (capture) {
+    image(capture, 0, 0);
+  }
 }
+
       
       
     </script>
