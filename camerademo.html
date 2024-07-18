@@ -1,78 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>身分証撮影アプリ</title>
+    <link rel="stylesheet" href="a.css" />
   </head>
   <body>
-    <script>
-      /*
-      async function startCamera() {
-        const cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: "environment",
+    <div class="camera-container">
+      <video id="video" autoplay></video>
+      <div class="guide-frame"></div>
+    </div>
+    <button id="capture">撮影</button>
+    <canvas id="canvas" style="display: none"></canvas>
 
-            aspectRatio: {
-              exact: 1.6,
-            },
-          },
-          audio: false,
-        });
-        const videoElement = document.createElement("video");
-        videoElement.autoplay = true;
-        videoElement.srcObject = cameraStream;
-        document.body.append(videoElement);
-        videoElement.addEventListener("resize", () => {
-          videoElement.width = videoElement.videoWidth;
-          videoElement.height = videoElement.videoHeight;
-        });
-      }
-      startCamera();
-      */
 
-const facingModeList = [
-  "user",
-  "environment",
-  { exact: "user" },
-  { exact: "environment" },
-];
-
-const options = [];
-
-let capture;
-
-function setup() {
-  createCanvas(640, 480);
-
-  for (mode of facingModeList) {
-    options.push({
-      video: {
-        facingMode: mode,
-      },
-      audio: false,
-    });
-  }
-
-  for (let i = 0; i < options.length; i++) {
-    const button = createButton(JSON.stringify(facingModeList[i]));
-    button.position(10, 10 + 35 * i);
-    button.size(160);
-    button.mousePressed(function () {
-      capture = createCapture(options[i]);
-      capture.hide();
-    });
-  }
-}
-
-function draw() {
-  background(220);
-
-  if (capture) {
-    image(capture, 0, 0);
-  }
-}
-
-      
-      
-    </script>
+    <script src="a.js"></script>
   </body>
 </html>
+
+
