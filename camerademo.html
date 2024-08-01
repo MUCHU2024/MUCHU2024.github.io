@@ -4,76 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>身分証撮影アプリ</title>
-   <style>
-.camera-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-   
-  }
-video {
-  
-   width: 100%;
-   
-}
-.guide-frame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    <style>
+      .camera-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+      }
+      video {
+        /* width: 100%; */
+        /* height: auto; */
+        width: 100%;
+        display: block; /* displayをblockに設定して横幅を強制する */
+        /* width: 100%; */
+        /* aspect-ratio: 4 / 5;
+        -webkit-aspect-ratio: 4 / 6; */
 
-  width: 60%;
-  
-  pointer-events: none; /* ガイド枠がクリックを妨げないようにする */
-}
-#photo {
+        /* width: 400px;
+        height: 400px; */
+      }
+      .guide-frame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 60%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        /* height: 60%; */
+        /* border: 2px dashed red; */
+        /* box-sizing: border-box; */
+        pointer-events: none; /* ガイド枠がクリックを妨げないようにする */
+      }
+      #photo {
         height: 200px;
       }
-   </style>
+    </style>
   </head>
   <body>
     <div class="camera-container">
       <video id="video" autoplay muted playsinline></video>
       <div>
-        <img class="guide-frame" src="maruma-ku-illust3.png" alt="ガイド" />
+        <img class="guide-frame" src="Tシャツアイコン7.png" alt="ガイド" />
       </div>
     </div>
     <button id="capture">撮影</button>
+    <button id="toggle-camera">カメラ切り替え</button>
+
     <canvas id="canvas" style="display: none"></canvas>
-<div>
+    <div>
       <img id="photo" alt="撮影した画像" />
     </div>
 
     <script>
-    
-navigator.mediaDevices
-  .getUserMedia({ video: true })
-  .then((stream) => {
-    const video = document.getElementById("video");
-    video.srcObject = stream;
-  })
-  .catch((error) => {
-    console.error("カメラにアクセスできませんでした:", error);
-  });
+      //↓↓↓
+      navigator.mediaDevices.getUserMedia({ video: true });
 
+      let currentStream;
+      let isFrontCamera = true;
+      function startCamera() {
+        const constraints = {
+          video: {
+            facingMode: isFrontCamera ? "user" : "environment",
+          },
+        };
+        navigator.mediaDevices
+          .getUserMedia(constraints)
+          .then((stream) => {
+            if (currentStream) {
+              currentStream.getTracks().forEach((track) => track.stop());
+            }
+            currentStream = stream;
+            const video = document.getElementById("video");
+            video.srcObject = stream;
+          })
+          .catch((error) => {
+            console.error("カメラにアクセスできませんでした:", error);
+          });
+      }
 
+      //↑↑↑
+      // navigator.mediaDevices
+      //   .getUserMedia({ video: true })
+      //   .then((stream) => {
+      //     const video = document.getElementById("video");
+      //     video.srcObject = stream;
+      //   })
+      //   .catch((error) => {
+      //     console.error("カメラにアクセスできませんでした:", error);
+      //   });
 
-document.getElementById("capture").addEventListener("click", () => {
-  const canvas = document.getElementById("canvas");
-  const video = document.getElementById("video");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  const context = canvas.getContext("2d");
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
- 
-  const dataURL = canvas.toDataURL("image/png");
-  
-  let photo = document.getElementById("photo");
+      document.getElementById("capture").addEventListener("click", () => {
+        const canvas = document.getElementById("canvas");
+        const video = document.getElementById("video");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const dataURL = canvas.toDataURL("image/png");
+
+        let photo = document.getElementById("photo");
         photo.setAttribute("src", dataURL);
-});
+        // console.log("キャプチャした画像のデータURL:", dataURL);
+      });
 
+      //↓↓↓
+      document.getElementById("toggle-camera").addEventListener("click", () => {
+        isFrontCamera = !isFrontCamera;
+        startCamera();
+      });
+      startCamera();
     </script>
   </body>
 </html>
 
-
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style></style>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        getUserMedia({
+          audio: false,
+          video: {
+            facingMode: { exact: "environment" },
+          },
+        });
+      };
+    </script>
+  </body>
+</html> -->
