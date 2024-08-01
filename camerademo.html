@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>身分証撮影アプリ</title>
    <style>
-     .camera-container {
-  position: relative;
-  width: 100%;
-  max-width: 640px;
-  margin: auto;
-}
+.camera-container {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: auto;
+  }
 video {
    width: 100%;
    aspect-ratio: 5 / 4;
 }
 .guide-frame {
- position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-        width: 60%;
-        aspect-ratio: 5 / 4;
+  width: 60%;
+  aspect-ratio: 5 / 4;
   pointer-events: none; /* ガイド枠がクリックを妨げないようにする */
 }
-     #photo {
-        height: 200px;
-      }
+#photo {
+  height: 200px;
+}
    </style>
   </head>
   <body>
