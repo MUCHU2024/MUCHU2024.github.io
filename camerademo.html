@@ -12,29 +12,36 @@
   margin: auto;
 }
 video {
-  width: 100%;
-  height: auto;
+   width: 100%;
+   aspect-ratio: 4/3;
 }
 .guide-frame {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  border: 2px dashed red;
-  box-sizing: border-box;
+ position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 60%;
+        aspect-ratio: 4 / 3;
   pointer-events: none; /* ガイド枠がクリックを妨げないようにする */
 }
+     #photo {
+        height: 200px;
+      }
    </style>
   </head>
   <body>
     <div class="camera-container">
       <video id="video" autoplay muted playsinline></video>
-      <div class="guide-frame"></div>
+      <div>
+        <img class="guide-frame" src="maruma-ku-illust3.png" alt="ガイド" />
+      </div>
     </div>
     <button id="capture">撮影</button>
     <canvas id="canvas" style="display: none"></canvas>
-
+<div>
+      <img id="photo" alt="撮影した画像" />
+    </div>
 
     <script>
     
@@ -59,7 +66,9 @@ document.getElementById("capture").addEventListener("click", () => {
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
  
   const dataURL = canvas.toDataURL("image/png");
-  console.log("キャプチャした画像のデータURL:", dataURL);
+  
+  let photo = document.getElementById("photo");
+        photo.setAttribute("src", dataURL);
 });
 
     </script>
