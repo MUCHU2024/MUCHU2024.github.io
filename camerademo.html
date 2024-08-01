@@ -11,16 +11,8 @@
         max-width: 800px;
       }
       video {
-        /* width: 100%; */
-        /* height: auto; */
         width: 100%;
         display: block; /* displayをblockに設定して横幅を強制する */
-        /* width: 100%; */
-        /* aspect-ratio: 4 / 5;
-        -webkit-aspect-ratio: 4 / 6; */
-
-        /* width: 400px;
-        height: 400px; */
       }
       .guide-frame {
         position: absolute;
@@ -50,14 +42,14 @@
     </div>
     <button id="capture">撮影</button>
     <button id="toggle-camera">カメラ切り替え</button>
+    <a id="download" style="display: none">ダウンロード</a>
 
     <canvas id="canvas" style="display: none"></canvas>
     <div>
-      <img id="photo" alt="撮影した画像" />
+      <img id="photo" alt="ここに撮影した画像がでます" />
     </div>
 
     <script>
-      //↓↓↓
       navigator.mediaDevices.getUserMedia({ video: true });
 
       let currentStream;
@@ -83,33 +75,33 @@
           });
       }
 
-      //↑↑↑
-      // navigator.mediaDevices
-      //   .getUserMedia({ video: true })
-      //   .then((stream) => {
-      //     const video = document.getElementById("video");
-      //     video.srcObject = stream;
-      //   })
-      //   .catch((error) => {
-      //     console.error("カメラにアクセスできませんでした:", error);
-      //   });
-
       document.getElementById("capture").addEventListener("click", () => {
+        //撮影ボタン
         const canvas = document.getElementById("canvas");
         const video = document.getElementById("video");
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         const context = canvas.getContext("2d");
+
+        // 画像を水平に反転する
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
+
+        //画像を表示
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
         const dataURL = canvas.toDataURL("image/png");
-
         let photo = document.getElementById("photo");
         photo.setAttribute("src", dataURL);
         // console.log("キャプチャした画像のデータURL:", dataURL);
+
+        // ダウンロードリンクを設定する
+        const downloadButton = document.getElementById("download");
+        downloadButton.href = dataURL;
+        //画像に名前をつけて、ダウンロード可能に
+        downloadButton.download = "captured_image.png";
+        downloadButton.style.display = "block";
       });
 
-      //↓↓↓
       document.getElementById("toggle-camera").addEventListener("click", () => {
         isFrontCamera = !isFrontCamera;
         startCamera();
