@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>撮影アプリ</title>
     <style>
+      /* 追加分CSS↓ */
+      #kiyaku,
+      #typeselect,
+      #cameraselect,
+      #tempselect,
+      #Beforeshooting {
+        display: flex;
+        justify-content: center; /* 横幅の真ん中に配置 */
+        align-items: center; /* 縦方向の中央に配置 */
+        height: 100vh; /* ビューポートの高さ全体を使用 */
+        text-align: center;
+      }
+      #kiyakudoui,
+      #startshoot {
+        background-color: orange;
+        color: black;
+        padding: 20px 40px;
+        margin: 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+      }
+
+      #tops,
+      #bottoms {
+        background-color: orange;
+        color: black;
+        padding: 40px 70px;
+        margin: 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+      }
+
+      #outcamera,
+      #incamera {
+        background-color: orange;
+        color: black;
+        padding: 70px 90px;
+        margin: 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+      }
+
+      /* 追加分CSS↑ */
       .scr {
         display: none;
       }
@@ -153,7 +199,7 @@
       <button>1</button><button>2</button><button>3</button><button>4</button
       ><button>5</button>
       <p>↑js側から挿入で作るほうがいいかも</p>
-      <button id="temp">あとでつくる</button>
+      <button id="temp">デモ版はこのボタン</button>
     </div>
     <!-- 撮影注意画面 -->
     <div class="scr" id="Beforeshooting">
@@ -481,9 +527,11 @@
       // タイマーの追加
       document.getElementById("capture").addEventListener("click", () => {
         const timer = document.getElementById("timer");
-        timer.style.display = "block"; // タイマーを表示
         let count = 5;
-        let countdown = setInterval(() => {
+        timer.style.display = "block"; // タイマーを表示
+
+        // タイマーを更新する関数
+        function updateTimer() {
           timer.textContent = count;
           if (count === 0) {
             clearInterval(countdown);
@@ -491,7 +539,10 @@
             captureImage(); // 写真を撮影
           }
           count--;
-        }, 1000); // 1秒ごとにカウントダウン
+        }
+
+        updateTimer(); // 初期カウントを表示
+        let countdown = setInterval(updateTimer, 1000); // 1秒ごとにカウントダウン
       });
 
       //メニュー↓
