@@ -74,9 +74,11 @@
         width: 100%;
         max-width: 800px;
       }
-      video {
-        width: 100%;
-        display: block; /* displayをblockに設定して横幅を強制する */
+      #video {
+          height: 400px; /* 縦幅を固定 */
+  width: auto; /* 横幅は自動調整 */
+  object-fit: cover; /* コンテンツのアスペクト比を保持しつつ、要素のサイズに合わせる */
+
       }
       .guide-frame {
         position: absolute;
