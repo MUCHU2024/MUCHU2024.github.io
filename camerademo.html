@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>撮影アプリ</title>
     <style>
+      body {
+        margin: 0;
+      }
       /* 追加分CSS↓ */
+
+      #capture {
+        border-radius: 50%;
+        border: 3px solid orange;
+        text-align: center;
+        margin: 5px 0;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        display: block;
+      }
+
       #kiyaku,
       #typeselect,
       #cameraselect,
@@ -196,9 +211,11 @@
     <!-- トップス画面orボトムス画面　(テンプレ選択) -->
     <div class="scr" id="tempselect">
       <p>服の形を選んでください(トップスボトムス2種つくる)</p>
-      <button>1</button><button>2</button><button>3</button><button>4</button
-      ><button>5</button>
-      <p>↑js側から挿入で作るほうがいいかも</p>
+      <div id="button-container">
+        <!-- ボタンがここに挿入されます -->
+      </div>
+      <!-- <button>1</button><button>2</button><button>3</button><button>4</button
+      ><button>5</button> -->
       <button id="temp">デモ版はこのボタン</button>
     </div>
     <!-- 撮影注意画面 -->
@@ -284,6 +301,9 @@
       // 初期表示
       showScreen(screenCount);
 
+      let katagami = 0;
+      //↑型紙の種類がトップス＝1,ボトムス＝2
+
       //規約同意ボタン
       const kiyakudoui = document
         .getElementById("kiyakudoui")
@@ -296,6 +316,8 @@
       const tops = document
         .getElementById("tops")
         .addEventListener("click", () => {
+          katagami = 1;
+          katagamiEvent();
           screenCount = 2;
           console.log(screenCount);
           showScreen(screenCount);
@@ -303,6 +325,9 @@
       const bottoms = document
         .getElementById("bottoms")
         .addEventListener("click", () => {
+          katagami = 2;
+          katagamiEvent();
+
           screenCount = 2;
           console.log(screenCount);
           showScreen(screenCount);
@@ -336,6 +361,54 @@
           console.log(screenCount);
           showScreen(screenCount);
         });
+
+      function katagamiEvent() {
+        // JavaScriptでボタンを挿入するコード
+        // document.addEventListener("DOMContentLoaded", () => {});
+
+        // idはボタンコンテナ
+        const buttonContainer = document.getElementById("button-container");
+
+        //トップスの選択肢
+        let topstemp = [
+          "短丈Tシャツ",
+          "ビッグシルエットTシャツ",
+          "パーカー",
+          "カラーシャツ",
+          "テンプレートを使用しない",
+        ]; //後にimgファイルにする
+        //ボトムスの選択肢
+        let bottomstemp = [
+          "パンツ",
+          "台形ミニスカート",
+          "テンプレートを使用しない",
+        ];
+
+        // ボタンコンテナ内の既存のボタンを削除
+        while (buttonContainer.firstChild) {
+          buttonContainer.removeChild(buttonContainer.firstChild);
+        }
+
+        if (katagami == 1) {
+          // 1から5までのボタンを生成して挿入
+          for (let i = 0; i < topstemp.length; i++) {
+            // 新しいボタン要素を作成
+            const button = document.createElement("button");
+            button.textContent = topstemp[i]; // ボタンのテキストを設定
+            buttonContainer.appendChild(button); // コンテナにボタンを追加
+          }
+        } else if (katagami == 2) {
+          // ボタンを生成して挿入
+          for (let i = 0; i < bottomstemp.length; i++) {
+            // 新しいボタン要素を作成
+            const button = document.createElement("button");
+            button.textContent = bottomstemp[i]; // ボタンのテキストを設定
+            buttonContainer.appendChild(button); // コンテナにボタンを追加
+          }
+        } else if (katagami > 2) {
+          window.alert("型紙がありません");
+        }
+      }
 
       //撮影開始ボタンにて、カメラ画面への切り替えと、カウントを１回目に設定
       const startshoot = document
