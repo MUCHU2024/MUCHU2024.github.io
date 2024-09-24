@@ -170,7 +170,7 @@ function randomQ(qg) {
     /*ran = Math.floor(Math.random() * 3) + 3;*/
     ran = 3;
   } else {
-    ran = Math.floor(Math.random() * 3) + 6;
+
         ran = Math.floor(Math.random() * 9) + 4;
 
   }
