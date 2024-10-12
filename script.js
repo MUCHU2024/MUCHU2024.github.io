@@ -68,6 +68,9 @@ const Qimg = [
   "初級1.png",
   "初級2.png",
   "初級3.png",
+  "初級4.png",
+  "初級5.png",
+  
   "中級.png",
   "上級1.png",
   "上級2.png",
@@ -78,11 +81,17 @@ const Qimg = [
   "上級7.png",
   "上級8.png",
   "上級9.png",
+  "上級10.png",
+  "上級11.png",
+  "上級12.png",
+  "上級13.png"
 ]; //問題画像
 const Corr = [
  "将棋",
   "かいすい",
   "心音", 
+  "かんたん４こたえ",
+  "かんたん５こたえ",
 
   "東京",
 
@@ -94,7 +103,12 @@ const Corr = [
   "ふぁみれす",
   "糸",
   "えべれすと",
-  "ねずみ", 
+  "ねずみ",
+  "ねずみ",
+  "ねずみ",
+  "ねずみ",
+  "ねずみ"
+  
 ]; //対応する正解
 const kiQimg = [
   "子供用謎解き1.png",
@@ -162,17 +176,15 @@ let ranQ;
 let ranA;
 let ran;
 function randomQ(qg) {
-  //qgで一問目→1~3/4~6/7~9
+  //qgで一問目
   //最大値引く最小値＋最小値（フロア後）
   if (qg == 1) {
-    ran = Math.floor(Math.random() * 3);
+    ran = Math.floor(Math.random() * 6); // 0,1,2,3,4,5
   } else if (qg == 2) {
     /*ran = Math.floor(Math.random() * 3) + 3;*/
-    ran = 3;
+    ran = 6;
   } else {
-
-        ran = Math.floor(Math.random() * 9) + 4;
-
+    ran = Math.floor(Math.random() * 13) + 7; // 7,8,9,10,11,12,13,14,15,16,17,18,19
   }
   //ランダムにする
 
